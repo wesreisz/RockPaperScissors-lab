@@ -4,14 +4,24 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ImageView rockButton = (ImageView)findViewById(R.id.imageRock);
+        rockButton.setOnClickListener(this);
+        ImageView paperButton = (ImageView)findViewById(R.id.imagePaper);
+        paperButton.setOnClickListener(this);
+        ImageView scissorsButton = (ImageView)findViewById(R.id.imageScissors);
+        scissorsButton.setOnClickListener(this);
     }
 
 
@@ -35,5 +45,22 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId()==R.id.imageRock){
+            showMessage(view,"You clicked Rock");
+        }else if(view.getId()==R.id.imagePaper){
+            showMessage(view,"You clicked Paper");
+        }else{
+            showMessage(view,"You clicked Scissors");
+        }
+
+    }
+
+    private void showMessage(View view, String message){
+        Toast toast = Toast.makeText(view.getContext(),message, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
